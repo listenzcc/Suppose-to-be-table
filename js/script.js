@@ -43,8 +43,6 @@ const AlertMsg = {
       dividerCode === 32 ? removeRepeat(converted) : converted
     ).join("");
 
-    document.getElementById("p-3").innerHTML = AlertMsg.pending;
-
     fillDiv3();
   }
 
@@ -89,6 +87,7 @@ const AlertMsg = {
  * It is the table-like version of the #textarea-3
  */
 function fillDiv3() {
+  document.getElementById("p-3").innerHTML = AlertMsg.pending;
   const divId = "div-3",
     { value } = document.getElementById("textarea-3");
 
