@@ -11,6 +11,11 @@ const AlertMsg = {
 
   document.getElementById("textarea-3").oninput = fillDiv3;
 
+  /**
+   * Fetch the value from #textarea-1.
+   * Fetch the option from #option-2.
+   * Parse the value, convert it into the \t divided content and update the #textarea-3 and #p-3
+   */
   function refresh() {
     var code;
 
@@ -32,10 +37,28 @@ const AlertMsg = {
       return char;
     });
 
-    document.getElementById("textarea-3").value = converted.join("");
+    // Remove the repeated divider if it is space,
+    // since the space is invisible and the connected space usually refers the single divider.
+    document.getElementById("textarea-3").value = (
+      dividerCode === 32 ? removeRepeat(converted) : converted
+    ).join("");
+
     document.getElementById("p-3").innerHTML = AlertMsg.pending;
 
     fillDiv3();
+  }
+
+  /**
+   * Remove repeated \t from the charArray
+   * @param {Array} charArray
+   * @returns Converted Array
+   */
+  function removeRepeat(charArray) {
+    return charArray.map((char, i) => {
+      if (i === 0) return char;
+      if (char === "\t" && charArray[i - 1] === "\t") return "";
+      return char;
+    });
   }
 }
 
@@ -61,6 +84,10 @@ const AlertMsg = {
   });
 }
 
+/**
+ * Fill the #div-3.
+ * It is the table-like version of the #textarea-3
+ */
 function fillDiv3() {
   const divId = "div-3",
     { value } = document.getElementById("textarea-3");
