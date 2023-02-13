@@ -111,7 +111,7 @@ function fillDiv3() {
     .append("div")
     .attr("class", "flex")
     .selectAll("p")
-    .data((d, i) => ["" + i].concat(d.split("\t")))
+    .data((d, i) => ["" + (i + 1)].concat(d.split("\t")))
     .enter()
     .append("p")
     .attr("class", (d, i) => (i > 0 ? "value" : "value ruler"))
